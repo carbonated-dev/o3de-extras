@@ -483,7 +483,7 @@ namespace Audio
 
         AkPlatformInitSettings akPlatformInitSettings;
         AK::SoundEngine::GetDefaultPlatformInitSettings(akPlatformInitSettings);
-#if defined(CARBONATED)
+#if defined(CARBONATED) && defined(AZ_PLATFORM_IOS)
         // enable background music to play, mix game's audio with other sources
         akPlatformInitSettings.audioSession.eCategory = AkAudioSessionCategoryAmbient;  // was AkAudioSessionCategorySoloAmbient
         akPlatformInitSettings.audioSession.eCategoryOptions = AkAudioSessionCategoryOptionMixWithOthers;  // was AkAudioSessionCategoryOptionDuckOthers
