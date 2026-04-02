@@ -16,13 +16,20 @@
 
 namespace Audio::Wwise
 {
+#if defined(CARBONATED)    
+    static constexpr const char DefaultBanksPath[] = "Sounds/wwise/";
+#else
     static constexpr const char DefaultBanksPath[] = "sounds/wwise/";
+#endif
     static constexpr const char ExternalSourcesPath[] = "external";
     static constexpr const char ConfigFile[] = "wwise_config.json";
     static constexpr const char BankExtension[] = ".bnk";
     static constexpr const char MediaExtension[] = ".wem";
+#if defined(CARBONATED)    
+    static constexpr const char InitBank[] = "Init.bnk";
+#else
     static constexpr const char InitBank[] = "init.bnk";
-
+#endif
     //! Banks path that's set after reading the configuration settings.
     //! This might be different than the DefaultBanksPath.
     const AZStd::string_view GetBanksRootPath();
