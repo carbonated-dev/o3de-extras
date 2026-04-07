@@ -17,3 +17,5 @@ set(FILES
     Source/Builder/WwiseBuilderWorker.h
     Source/Engine/Config_wwise.cpp
 )
+
+# CARBONATED: The file Source/Engine/Config_wwise.cpp was added to support WWise on Linux in AssetProcessor, APB, etc...

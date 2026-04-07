@@ -176,6 +176,8 @@ if (PAL_TRAIT_BUILD_HOST_TOOLS)
                 Gem::${gem_name}.Builder.Private.Object
     )
 
+#  CARBONATED:  Gem::${gem_name}.Private.Object was deleted in the previous ly_add_target {}. It was after Gem::${gem_name}.Builder.Private.Object
+
     ly_add_target(
         NAME ${gem_name}.Editor.Private.Object STATIC
         NAMESPACE Gem
