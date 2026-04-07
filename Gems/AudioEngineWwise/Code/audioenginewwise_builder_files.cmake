@@ -15,4 +15,5 @@ set(FILES
     Source/Builder/WwiseBuilderComponent.h
     Source/Builder/WwiseBuilderWorker.cpp
     Source/Builder/WwiseBuilderWorker.h
+    Source/Engine/Config_wwise.cpp
 )

@@ -174,7 +174,6 @@ if (PAL_TRAIT_BUILD_HOST_TOOLS)
                 Legacy::CryCommon
             PRIVATE
                 Gem::${gem_name}.Builder.Private.Object
-                Gem::${gem_name}.Private.Object
     )
 
     ly_add_target(
