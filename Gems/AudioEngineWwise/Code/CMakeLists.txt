@@ -174,9 +174,10 @@ if (PAL_TRAIT_BUILD_HOST_TOOLS)
                 Legacy::CryCommon
             PRIVATE
                 Gem::${gem_name}.Builder.Private.Object
+#                Gem::${gem_name}.Private.Object       #  CARBONATED:  To avoid double include of 3rdParty::Wwise
     )
 
-#  CARBONATED:  Gem::${gem_name}.Private.Object was deleted in the previous ly_add_target {}. It was after Gem::${gem_name}.Builder.Private.Object
+
 
     ly_add_target(
         NAME ${gem_name}.Editor.Private.Object STATIC
