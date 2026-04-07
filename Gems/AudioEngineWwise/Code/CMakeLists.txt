@@ -177,8 +177,6 @@ if (PAL_TRAIT_BUILD_HOST_TOOLS)
 #                Gem::${gem_name}.Private.Object       #  CARBONATED:  To avoid double include of 3rdParty::Wwise
     )
 
-
-
     ly_add_target(
         NAME ${gem_name}.Editor.Private.Object STATIC
         NAMESPACE Gem
