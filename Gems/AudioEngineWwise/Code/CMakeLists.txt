@@ -174,7 +174,7 @@ if (PAL_TRAIT_BUILD_HOST_TOOLS)
                 Legacy::CryCommon
             PRIVATE
                 Gem::${gem_name}.Builder.Private.Object
-                Gem::${gem_name}.Private.Object
+#                Gem::${gem_name}.Private.Object       #  CARBONATED:  To avoid double include of 3rdParty::Wwise
     )
 
     ly_add_target(
