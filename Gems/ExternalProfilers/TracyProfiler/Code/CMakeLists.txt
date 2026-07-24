@@ -27,6 +27,16 @@ if(O3DE_COMPILE_OPTION_DISABLE_WARNINGS)
     target_compile_options(TracyClient ${O3DE_COMPILE_OPTION_DISABLE_WARNINGS})
 endif()
 
+# Tracy 0.13.1 emits a few warnings under Linux Clang that O3DE
+# promotes to errors through -Werror. Keep the warnings visible,
+# but do not treat these specific warning classes as fatal.
+if(CMAKE_CXX_COMPILER_ID MATCHES "Clang|GNU")
+    target_compile_options(TracyClient PRIVATE
+        -Wno-error=unused-variable
+        -Wno-error=unused-result
+    )
+endif()
+
 # Let's not clutter the root of any IDE folder structure with 3rd party dependencies
 # Setting the FOLDER makes it show up there in the solution build in VS and similarly
 # any other IDEs that organize in folders.
