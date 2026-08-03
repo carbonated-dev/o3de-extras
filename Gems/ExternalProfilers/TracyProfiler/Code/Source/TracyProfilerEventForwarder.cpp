@@ -17,13 +17,16 @@ namespace TracyProfiler
 
     void TracyProfilerEventForwarder::Init()
     {
+#if defined(CARBONATED_TRACY_ENABLE)
         AZ::Interface<AZ::Debug::Profiler>::Register(this);
         AZ::TickBus::Handler::BusConnect();
         m_initialized = true;
+#endif
     }
 
     void TracyProfilerEventForwarder::Shutdown()
     {
+#if defined(CARBONATED_TRACY_ENABLE)
         if (!m_initialized)
         {
             return;
@@ -36,8 +39,10 @@ namespace TracyProfiler
         AZStd::unique_lock<AZStd::shared_mutex> shutdownLock(m_shutdownMutex);
 
         AZ::TickBus::Handler::BusDisconnect();
+#endif
     }
 
+#if defined(CARBONATED_TRACY_ENABLE)
     void TracyProfilerEventForwarder::BeginRegion(const AZ::Debug::Budget* budget, const char* eventName, [[maybe_unused]] size_t eventNameArgCount, ...)
     {
         // Try to lock here, the shutdownMutex will only be contested when the CpuProfiler is shutting down.
@@ -55,9 +60,15 @@ namespace TracyProfiler
             m_shutdownMutex.unlock_shared();
         }
     }
+#else
+    void TracyProfilerEventForwarder::BeginRegion(const AZ::Debug::Budget*, const char*, size_t, ...)
+    {
+    }
+#endif
 
     void TracyProfilerEventForwarder::EndRegion([[maybe_unused]] const AZ::Debug::Budget* budget)
     {
+#if defined(CARBONATED_TRACY_ENABLE)
         // Try to lock here, the shutdownMutex will only be contested when the CpuProfiler is shutting down.
         if (m_shutdownMutex.try_lock_shared() && !ms_threadLocalStorage.empty())
         {
@@ -67,6 +78,7 @@ namespace TracyProfiler
 
             m_shutdownMutex.unlock_shared();
         }
+#endif
     }
 
     int TracyProfilerEventForwarder::GetTickOrder()
@@ -76,8 +88,10 @@ namespace TracyProfiler
 
     void TracyProfilerEventForwarder::OnTick([[maybe_unused]] float deltaTime, [[maybe_unused]] AZ::ScriptTimePoint timePoint)
     {
+#if defined(CARBONATED_TRACY_ENABLE)
         // From Tracy documentation about FrameMark : "Ideally, that would be right after the swap buffers command"
         TracyCFrameMark;
+#endif
     }
 
 } // namespace TracyProfiler
