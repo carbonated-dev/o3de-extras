@@ -15,9 +15,13 @@ FetchContent_Declare(
 )
 set(CMAKE_POLICY_DEFAULT_CMP0077 NEW)
 
-set(TRACY_ENABLE ON CACHE BOOL "Enable Tracy profiling" FORCE)
-set(TRACY_CALLSTACK ON CACHE BOOL "Enable Tracy call stacks" FORCE)
-set(TRACY_ON_DEMAND ON CACHE BOOL "Enable Tracy on-demand mode" FORCE)
+set(TRACY_ENABLE OFF CACHE BOOL "Enable Tracy profiling")
+set(TRACY_CALLSTACK ON CACHE BOOL "Enable Tracy call stacks")
+set(TRACY_ON_DEMAND ON CACHE BOOL "Enable Tracy on-demand mode")
+
+if (TRACY_ENABLE)
+    add_compile_definitions(CARBONATED_TRACY_ENABLE)
+endif()
 
 FetchContent_MakeAvailable(Tracy)
 
